@@ -25,20 +25,22 @@ ExternalProject_Add(
 
 ELSE()
 
-ExternalProject_Add(
-  x264_linux
-  URL ${CMAKE_CURRENT_SOURCE_DIR}/x264.tar.bz2
-  SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/x264_sources
-  CONFIGURE_COMMAND ${CMAKE_CURRENT_BINARY_DIR}/x264_sources/configure --prefix=${CMAKE_CURRENT_BINARY_DIR}/artifacts --enable-shared --disable-avs --disable-cli --disable-gpl
-  PREFIX ${CMAKE_CURRENT_BINARY_DIR}/artifacts
-  INSTALL_COMMAND make install COMMAND make install-lib-dev COMMAND make install-lib-static
-)
+  if(CMAKE_SYSTEM MATCHES "Linux-")
+
+    ExternalProject_Add(
+      x264_linux
+      URL ${CMAKE_CURRENT_SOURCE_DIR}/x264.tar.bz2
+      SOURCE_DIR ${CMAKE_CURRENT_BINARY_DIR}/x264_sources
+      CONFIGURE_COMMAND ${CMAKE_CURRENT_BINARY_DIR}/x264_sources/configure --prefix=${CMAKE_CURRENT_BINARY_DIR}/artifacts --enable-shared --disable-avs --disable-cli --disable-gpl
+      PREFIX ${CMAKE_CURRENT_BINARY_DIR}/artifacts
+      INSTALL_COMMAND make install COMMAND make install-lib-dev COMMAND make install-lib-static
+    )
+
+  ENDIF()
 
 ENDIF()
 
-
 set(CMAKE_INSTALL_PREFIX ${devel_artifacts_path})
-
 
 if(CMAKE_SYSTEM MATCHES "Linux-")
 
@@ -53,5 +55,6 @@ else()
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/x264-Win64-artifacts/include/x264.h DESTINATION include/x264)
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/x264-Win64-artifacts/include/x264_config.h DESTINATION include/x264)
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/x264-Win64-artifacts/bin/libx264-142.dll DESTINATION lib)
+  install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/x264-Win64-artifacts/bin/libx264-142.lib DESTINATION lib)
 
 endif()

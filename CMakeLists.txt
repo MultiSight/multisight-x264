@@ -40,9 +40,9 @@ ELSE()
 
 ENDIF()
 
-set(CMAKE_INSTALL_PREFIX ${devel_artifacts_path})
+SET(CMAKE_INSTALL_PREFIX ${devel_artifacts_path})
 
-if(CMAKE_SYSTEM MATCHES "Linux-")
+IF(CMAKE_SYSTEM MATCHES "Linux-")
 
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/artifacts/include/x264.h DESTINATION include/x264)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/artifacts/include/x264_config.h DESTINATION include/x264)
@@ -50,11 +50,11 @@ if(CMAKE_SYSTEM MATCHES "Linux-")
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/artifacts/lib/libx264.so DESTINATION lib)
   install(FILES ${CMAKE_CURRENT_BINARY_DIR}/artifacts/lib/libx264.so.142 DESTINATION lib)
 
-else()
+ELSE()
 
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/x264-Win64-artifacts/include/x264.h DESTINATION include/x264)
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/x264-Win64-artifacts/include/x264_config.h DESTINATION include/x264)
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/x264-Win64-artifacts/bin/libx264-142.dll DESTINATION lib)
   install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/x264-Win64-artifacts/bin/libx264-142.lib DESTINATION lib)
 
-endif()
+ENDIF()
